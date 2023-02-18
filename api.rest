@@ -1,0 +1,6 @@
+GET http://localhost:3000/api/users/sichinavailia@gmail.co
+Content-Type: application/json
+
+{
+    "username": "ilia chemi kai"
+}
