@@ -3,5 +3,7 @@ export interface USER {
     name: string,
     image: string,
     email: string,
-    username?: string
+    username?: string,
+    friends?: string[],
+    requests?: string[] 
 }

@@ -7,6 +7,7 @@ import { SessionProvider } from 'next-auth/react';
 import Window from '@/containers/Window';
 import Navbar from '@/components/Navbar';
 
+
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>

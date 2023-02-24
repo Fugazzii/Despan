@@ -2,9 +2,9 @@ import NextAuth from 'next-auth';
 import GoogleProvider from "next-auth/providers/google";
 import clientPromise from '../../../../libs/mongodb';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
-import { get_user } from 'utils/api';
-import { USER } from '@/interfaces';
-import { connectToDatabase } from 'utils/mongo';
+// import { get_user } from 'utils/api';
+// import { USER } from '@/interfaces';
+// import { connectToDatabase } from 'utils/mongo';
 
 export default NextAuth({
     providers: [
@@ -16,35 +16,35 @@ export default NextAuth({
     secret: process.env.JWT_SECRET, 
     adapter: MongoDBAdapter(clientPromise),
     pages: {
-        signIn: "http://localhost:3000/dashboard",
-        signOut: "http://localhost:3000/"
+        signIn: "/dashboard",
+        signOut: "/"
     },
     callbacks: {
-        signIn: async ({ user, account, profile }) => {
-            const us: USER | null = await get_user(user?.email ? user?.email : "");
-            if(!us) {
-                const { db } = await connectToDatabase();
-                
-                let newUser = {
-                    name: user.name,
-                    email: user.email,
-                    image: user.image,
-                    username: user.email?.split("@")[0],
-                    friends: [],
-                    requests: []
-                }
-                await db
-                    .collection("users")
-                    .insertOne(newUser);
-            }
+    //     signIn: async ({ user, account, profile }) => {
+    //         /* Gets user from database */
+    //         const us: USER | null = await get_user(user?.email ? user?.email : "");
             
-            return {
-                redirect: {
-                    destination: "http://localhost:3000/dashboard",
-                    permanent: false
-                }
-            }
-        },
+    //         if(!us) {
+    //             try {
+    //                 const { db } = await connectToDatabase();
+    //                 let newUser = {
+    //                     name: user.name,
+    //                     email: user.email,
+    //                     image: user.image,
+    //                     username: user.email?.split("@")[0],
+    //                     friends: [],
+    //                     requests: []                
+    //                 }
+    //                 await db.collection("users").insertOne(newUser);
+    //             } catch (err) {
+    //                 console.error(err);
+    //                 return false;
+    //             }
+    //         }   
+
+    //         return true;
+    //     },
+
         session: async ({ session, token }) => {
             if (session?.user) {
                 session.user.id = token.uid;

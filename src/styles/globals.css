@@ -17,4 +17,9 @@
   .passive {
     @apply font-semibold text-slate-300 transition-all duration-150 ease-in-out hover:text-purple-300;
   }
+
+  .add_button {
+    @apply w-1/5 text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5
+    py-2.5 text-center inline-flex items-center mr-2 mb-2;
+  }
 }

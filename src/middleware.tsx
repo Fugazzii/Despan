@@ -10,12 +10,7 @@ export async function middleware(req: NextRequest) {
         secureCookie: process.env.NODE_ENV === "production",
     });
 
-    if (req.nextUrl.pathname !== "/") {
-        // You could also check for any property on the session object,
-        // like role === "admin" or name === "John Doe", etc.
-        if (!session) return NextResponse.redirect(`${dev}/`);
-        // If user is authenticated, continue.
-    } else {
-        if(session) return NextResponse.redirect("/dashboard");
+    if (req.nextUrl.pathname === "/") {
+        if (session) return NextResponse.redirect(`${dev}/dashboard`);
     }
 }

@@ -1,11 +1,10 @@
 import Head from 'next/head';
-import { useEffect, Fragment } from 'react';
-import { getProviders, signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { Fragment } from 'react';
+import { getProviders, signIn } from 'next-auth/react';
 
 export default function Home({ providers }: any) {
-    return (
+  return (
     <Fragment>
       <Head>
         <title>Despan</title>
@@ -32,7 +31,7 @@ export default function Home({ providers }: any) {
         ))}        
       </div>
     </Fragment>
-  )
+  );
 }
 
 export async function getServerSideProps() {

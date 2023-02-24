@@ -4,8 +4,7 @@ import { Session } from "next-auth";
 import Image from "next/image";
 
 import { useState } from "react";
-
-import { get_user, change_username } from "utils/api";
+import { get_user, change_username } from "@/controllers";
 
 export default function Dashboard({ user }: any) {
     const router = useRouter();
@@ -79,15 +78,22 @@ export default function Dashboard({ user }: any) {
 
 export async function getServerSideProps(context: any) {
     const session: Session | null = await getSession(context);
-    // if(!session) {
-    //     return {
-    //         permanent: false,
-    //         destination: '/'
-    //     }
-    // }
-    const email = session?.user?.email || "";
+    if(!session || !session.user || !session.user.email) {
+        return {
+            props: {
+                user: null
+            }
+        }
+    }
+
+    const { email } = session.user;
     const user = await get_user(email);
+
+    if(!user) {
+        return { props: { user: null } }
+    }
+
     return {
-        props: { session, user }
+        props: { user }
     }
 }
