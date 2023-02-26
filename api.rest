@@ -1,6 +1,7 @@
-PUT http://localhost:3000/api/users/sichinavailia@gmail.com/unfriend
+PUT http://localhost:3000/api/users/sichinavailia@gmail.com/addfriend
 Content-Type: application/json
 
 {
-    "unfriender": "isich21@freeuni.edu.ge"
+    "accepted": "isich21@freeuni.edu.ge",
+    "answer": true
 }
